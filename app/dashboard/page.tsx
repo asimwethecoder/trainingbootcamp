@@ -11,7 +11,8 @@ import {
   ChevronDown, 
   ChevronUp, 
   BookOpen,
-  ArrowRight 
+  ArrowRight, 
+  AlertCircle
 } from 'lucide-react'
 
 // ... sessions array stays the same ...
@@ -24,6 +25,51 @@ export default function BootcampSchedule() {
   useEffect(() => {
     setFadeIn(true);
   }, []);
+
+
+  const [user, setUser] = useState(null)
+  const [registeredSessions, setRegisteredSessions] = useState([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    // Here you would fetch user data and registered sessions from AppSync
+    const fetchUserData = async () => {
+      try {
+        // Implement AppSync queries here
+        // const { data } = await API.graphql(graphqlOperation(getUser, { id: userId }))
+        // setUser(data.getUser)
+        // const sessionsData = await API.graphql(graphqlOperation(listUserSessions, { userId }))
+        // setRegisteredSessions(sessionsData.data.listUserSessions.items)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUserData()
+  }, [])
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="animate-pulse space-y-4">
+          <div className="h-32 bg-gray-200 rounded-lg" />
+          <div className="h-64 bg-gray-200 rounded-lg" />
+        </div>
+      </div>
+    )
+  }
+  if (!user) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <div className="flex items-center">
+            <AlertCircle className="h-5 w-5 text-yellow-500 mr-2" />
+            <h2 className="text-lg font-medium">Please log in to view your dashboard</h2>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -62,7 +108,7 @@ export default function BootcampSchedule() {
 
         {/* Schedule List with enhanced animations */}
         <div className="space-y-6">
-          {sessions.map((session, index) => (
+          {registeredSessions.map((session, index) => (
             <div 
               key={session.id}
               className={`bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden
