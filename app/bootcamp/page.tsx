@@ -346,9 +346,6 @@ export default function BootcampSchedule() {
             <span className="ml-2">Back to Home</span>
           </Link>
           
-          <h1 className="text-xl font-semibold text-gray-900 absolute left-1/2 transform -translate-x-1/2">
-            Bootcamp Schedule
-          </h1>
 
           <Link
             href="/register"
