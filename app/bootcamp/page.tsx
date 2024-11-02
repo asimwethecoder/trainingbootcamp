@@ -347,7 +347,7 @@ export default function BootcampSchedule() {
           </Link>
           
           <h1 className="text-xl font-semibold text-gray-900 absolute left-1/2 transform -translate-x-1/2">
-            AWS Cloud Practitioner
+            Bootcamp Schedule
           </h1>
 
           <Link
