@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 
@@ -14,7 +14,7 @@ interface RegisterFormData {
 }
 
 export default function RegisterPage() {
-  const [formData, setFormData] = React.useState<RegisterFormData>({
+  const [formData, setFormData] = useState<RegisterFormData>({
     fullName: '',
     email: '',
     phone: '',
@@ -23,16 +23,24 @@ export default function RegisterPage() {
     experience: 'beginner'
   })
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
+    setIsSubmitted(true)
+  }
+
+  const handleConfirm = () => {
+    setIsSubmitted(false)
+    window.location.href = '/' // Redirect to home page
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
       {/* Navigation - reduced height */}
-      <nav className="bg-white border-b">
-        <div className="max-w-2xl mx-auto px-4 h-12 flex items-center">
+      <nav className="bg-white border-b w-full">
+        <div className="max-w-xl mx-auto px-4 h-12 flex items-center">
           <Link 
             href="/bootcamp" 
             className="flex items-center text-gray-600 hover:text-gray-900 text-sm"
@@ -43,9 +51,9 @@ export default function RegisterPage() {
         </div>
       </nav>
 
-      <main className="max-w-2xl mx-auto px-4 py-6">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+      <main className="max-w-xl mx-auto px-4 py-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6" style={{ maxWidth: '450px' }}>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">
             Register for AWS Bootcamp
           </h1>
 
@@ -84,11 +92,12 @@ export default function RegisterPage() {
 
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number
+                  Phone Number *
                 </label>
                 <input
                   type="tel"
                   id="phone"
+                  required
                   className="w-full p-1.5 text-sm border border-gray-300 rounded"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -102,11 +111,12 @@ export default function RegisterPage() {
               
               <div>
                 <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                  Company/Organization
+                  Company/Organization *
                 </label>
                 <input
                   type="text"
                   id="company"
+                  required
                   className="w-full p-1.5 text-sm border border-gray-300 rounded"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -115,11 +125,12 @@ export default function RegisterPage() {
 
               <div>
                 <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1">
-                  Job Title
+                  Job Title *
                 </label>
                 <input
                   type="text"
                   id="jobTitle"
+                  required
                   className="w-full p-1.5 text-sm border border-gray-300 rounded"
                   value={formData.jobTitle}
                   onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
@@ -145,10 +156,10 @@ export default function RegisterPage() {
             </div>
 
             {/* Submit Button */}
-            <div className="pt-4">
+            <div className="pt-4 flex justify-center">
               <button
                 type="submit"
-                className="w-full bg-[#4361ee] text-white py-2 px-4 rounded text-sm font-medium hover:bg-blue-700 transition-colors"
+                className="bg-blue-600 text-white py-2 px-6 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
               >
                 Submit Registration
               </button>
@@ -156,6 +167,25 @@ export default function RegisterPage() {
           </form>
         </div>
       </main>
+
+      {/* Confirmation Modal */}
+      {isSubmitted && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          style={{ zIndex: 1000 }}
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs text-center">
+            <h3 className="text-lg font-semibold">Registration Complete</h3>
+            <p className="mt-2">Thank you for registering for the AWS Bootcamp!</p>
+            <button
+              onClick={handleConfirm}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md mt-4"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
