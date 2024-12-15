@@ -3,6 +3,14 @@
 import Link from 'next/link'
 import { Calendar, Cloud, Star, ArrowUp, ChevronDown } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import CustomCalendar from '@/components/CustomCalendar'
+import SuccessStoriesCarousel from '@/components/SuccessStoriesCarousel'
+import AwsFeatures from '@/components/AwsFeatures'
+import AwsFeatures2 from '@/components/AwsFeatures2'
+import BentoSection from '@/components/BentoSection'
+import TrustedCompanies from '@/components/TrustedCompanies'
+import BootCamp from '@/components/BootCamp'
+import Hackathon from '@/components/Hackathon'
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -36,6 +44,13 @@ export default function Home() {
     }
   ];
 
+  const upcomingEvents = [
+    { date: '2025-01-02', description: "AWS Fundamentals Workshop", time: "10:00 AM - 12:00 PM" },
+    { date: '2025-01-06', description: "Cloud Architecture Seminar" },
+    { date: '2025-01-14', description: "Hands-on Lab: EC2 and S3", time: "2:00 PM - 4:00 PM" },
+    { date: '2025-01-20', description: "AWS Certification Prep Session", time: "11:00 AM - 1:00 PM" },
+  ];
+
   return (
     <main className="min-h-screen bg-white overflow-hidden">
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 text-center
@@ -59,12 +74,19 @@ export default function Home() {
             View Schedule
           </Link>
         </div>
-
+        
         <ChevronDown 
           className="w-6 h-6 mx-auto mt-16 text-gray-400 animate-bounce cursor-pointer"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         />
+        <TrustedCompanies />
       </div>
+
+      <BentoSection />
+      <BootCamp />
+      <Hackathon />
+      <AwsFeatures2 />
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -86,6 +108,19 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </div>
+      <>
+      <AwsFeatures />
+      </>
+      
+      
+      <div className=" py-16">
+        <SuccessStoriesCarousel />
+      </div>
+
+      <div id="calendar" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Bootcamp Calendar</h2>
+        <CustomCalendar upcomingEvents={upcomingEvents} />
       </div>
 
       <button 
