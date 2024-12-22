@@ -75,23 +75,24 @@ interface BootcampCardProps {
 
 const BootcampCard: React.FC<BootcampCardProps> = ({ bootcamp }) => (
   <div className="group relative overflow-hidden rounded-lg">
-    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 transition-all duration-300 ease-in-out group-hover:opacity-75 lg:aspect-none lg:h-80">
+    <div className="relative w-full h-[400px] bg-gray-200 transition-all duration-300 ease-in-out group-hover:opacity-75">
       <Image
         src={bootcamp.imageSrc}
         alt={bootcamp.imageAlt}
+        className="w-full h-full object-contain p-4"
         fill
-        className="object-cover object-center"
-        sizes="(min-width: 1280px) 17.5vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+        sizes="(min-width: 1280px) 33vw, (min-width: 1024px) 50vw, (min-width: 768px) 50vw, 100vw"
+        priority
       />
     </div>
-    <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-      <h3 className="text-lg font-medium text-white">
+    <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <h3 className="text-xl font-medium text-white">
         <a href={bootcamp.href}>
           <span className="absolute inset-0" />
           {bootcamp.name}
         </a>
       </h3>
-      <p className="mt-1 text-sm text-gray-300">{bootcamp.description}</p>
+      <p className="mt-2 text-base text-gray-300">{bootcamp.description}</p>
     </div>
   </div>
 )
@@ -100,9 +101,9 @@ const BootCamp: React.FC = () => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">Our AWS Bootcamps</h2>
+        <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-8">Our AWS Bootcamps</h2>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {bootcamps.map((bootcamp) => (
             <BootcampCard key={bootcamp.id} bootcamp={bootcamp} />
           ))}
