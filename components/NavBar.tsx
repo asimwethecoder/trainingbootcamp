@@ -5,22 +5,32 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import SmartFocusLogo from '@/assets/images/SmartFocusLogo.png';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       if (pathname !== '/') {
-        window.location.href = `/#${sectionId}`;
+        router.push(`/#${sectionId}`);
       } else {
         section.scrollIntoView({ behavior: 'smooth' });
         setIsMobileMenuOpen(false);
       }
     }
+  };
+
+  const handleNavClick = (href: string, onClick?: () => void) => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(href);
+    }
+    setIsMobileMenuOpen(false);
   };
 
   const navLinks = [
@@ -57,15 +67,18 @@ const Navigation: React.FC = () => {
       <div className="hidden md:flex items-center">
         <div className="ml-10 flex items-baseline space-x-4">
           {navLinks.map((link) => (
-            <Link 
+            <a 
               key={link.href} 
               href={link.href} 
-              onClick={link.onClick}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(link.href, link.onClick);
+              }}
               aria-current={pathname === link.href ? 'page' : undefined}
               className="nav-link text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 px-3 py-2 rounded-md"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
       </div>
@@ -97,12 +110,12 @@ const Navigation: React.FC = () => {
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 shadow-md">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => {
-                  link.onClick && link.onClick();
-                  setIsMobileMenuOpen(false);
+                  e.preventDefault();
+                  handleNavClick(link.href, link.onClick);
                 }}
                 aria-current={pathname === link.href ? 'page' : undefined}
                 className="nav-link block text-gray-700 dark:text-gray-300 
@@ -110,7 +123,7 @@ const Navigation: React.FC = () => {
                   px-3 py-2 rounded-md"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
         </div>

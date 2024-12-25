@@ -11,6 +11,8 @@ import BentoSection from '@/components/BentoSection'
 import TrustedCompanies from '@/components/TrustedCompanies'
 import BootCamp from '@/components/BootCamp'
 import Hackathon from '@/components/Hackathon'
+import TeamMembers from '@/components/TeamMembers'
+
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -81,6 +83,8 @@ export default function Home() {
         />
         <TrustedCompanies />
       </div>
+      {/* Team Members Section */}
+      <TeamMembers />
 
       <BentoSection />
       <BootCamp />
