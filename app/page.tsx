@@ -12,6 +12,7 @@ import TrustedCompanies from '@/components/TrustedCompanies'
 import BootCamp from '@/components/BootCamp'
 import Hackathon from '@/components/Hackathon'
 import TeamMembers from '@/components/TeamMembers'
+import IconCarousel from '@/components/IconCarousel'
 
 
 export default function Home() {
@@ -120,6 +121,10 @@ export default function Home() {
       
       <div className=" py-16">
         <SuccessStoriesCarousel />
+      </div>
+
+      <div className="py-16">
+        <IconCarousel />
       </div>
 
       <div id="calendar" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
