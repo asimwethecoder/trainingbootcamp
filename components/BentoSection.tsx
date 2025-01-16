@@ -9,7 +9,7 @@ const BentoSection: React.FC = () => {
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-center text-lg/7 font-semibold text-[#4361ee]">Empowering Skills, Transforming Lives</h2>
         <p className="mx-auto mt-2 max-w-lg text-balance text-center text-3xl font-semibold tracking-tight text-gray-950 sm:text-6xl">
-          Everything you need.
+          Unlock Your Potential.
         </p>
         <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
           <div className="relative lg:row-span-2">

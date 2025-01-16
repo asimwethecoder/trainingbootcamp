@@ -12,6 +12,7 @@ import TrustedCompanies from '@/components/TrustedCompanies'
 import BootCamp from '@/components/BootCamp'
 import Hackathon from '@/components/Hackathon'
 import TeamMembers from '@/components/TeamMembers'
+import IconCarousel from '@/components/IconCarousel'
 
 
 export default function Home() {
@@ -113,17 +114,23 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <>
-      <AwsFeatures />
-      </>
       
+      <div className="py-16">
+        <AwsFeatures />
+      </div>
       
+      {/*}
       <div className=" py-16">
         <SuccessStoriesCarousel />
       </div>
+      */}
+
+      <div className="py-16">
+        <IconCarousel />
+      </div>
 
       <div id="calendar" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Bootcamp Calendar</h2>
+        <h2 className="text-6xl font-bold text-gray-900 mb-8 text-center">Bootcamp Calendar</h2>
         <CustomCalendar upcomingEvents={upcomingEvents} />
       </div>
 
