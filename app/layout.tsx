@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import Footer from '@/components/Footer'
 
 // Load Inter font with specific subsets and display settings
 const inter = Inter({ 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <main className="flex-1">
               {children}
             </main>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>

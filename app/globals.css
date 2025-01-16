@@ -191,3 +191,18 @@ body {
 .dark *:focus-visible {
   @apply ring-offset-background;
 }
+
+@keyframes carousel {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-text-slider {
+  display: flex;
+  animation: carousel 20s linear infinite;
+  width: 200%; /* Double the width to accommodate the duplicated content */
+}
