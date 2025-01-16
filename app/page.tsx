@@ -114,14 +114,16 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <>
-      <AwsFeatures />
-      </>
       
+      <div className="py-16">
+        <AwsFeatures />
+      </div>
       
+      {/*}
       <div className=" py-16">
         <SuccessStoriesCarousel />
       </div>
+      */}
 
       <div className="py-16">
         <IconCarousel />
