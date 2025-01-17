@@ -53,45 +53,50 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({ upcomingEvents }) => {
     daysCells.push(
       <div 
         key={day} 
-        className={`text-center p-2 border rounded-lg hover:bg-gray-100 cursor-pointer ${hasEvent ? 'bg-blue-100' : ''}`}
+        className={`text-center p-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer ${
+          hasEvent ? 'bg-blue-100 dark:bg-blue-900' : 'dark:bg-gray-800'
+        }`}
       >
-        {day} {hasEvent && <div className="w-2 h-2 bg-blue-500 rounded-full mx-auto mt-1"></div>}
+        <span className="dark:text-gray-300">{day}</span>
+        {hasEvent && <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full mx-auto mt-1"></div>}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-8">
-      <div className="bg-white rounded-lg shadow-lg p-6 flex-1">
-        <div className="flex justify-between items-center mb-4">
-          <button onClick={handlePrevMonth} className="text-gray-600 hover:text-[#4361ee]">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <h2 className="text-2xl font-semibold text-gray-900">{monthName} {currentMonth.getFullYear()}</h2>
-          <button onClick={handleNextMonth} className="text-gray-600 hover:text-[#4361ee]">
-            <ChevronRight className="w-6 h-6" />
-          </button>
+    <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-lg">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex-1">
+          <div className="flex justify-between items-center mb-4">
+            <button onClick={handlePrevMonth} className="text-gray-600 dark:text-gray-400 hover:text-[#4361ee] dark:hover:text-[#6d86f1]">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{monthName} {currentMonth.getFullYear()}</h2>
+            <button onClick={handleNextMonth} className="text-gray-600 dark:text-gray-400 hover:text-[#4361ee] dark:hover:text-[#6d86f1]">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="grid grid-cols-7 gap-2 mb-4">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} className="text-center font-semibold text-gray-600 dark:text-gray-400">{day}</div>
+            ))}
+            {daysCells}
+          </div>
         </div>
-        <div className="grid grid-cols-7 gap-2 mb-4">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="text-center font-semibold text-gray-600">{day}</div>
-          ))}
-          {daysCells}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex-1">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Upcoming Events</h3>
+          {filteredEvents.length > 0 ? (
+            filteredEvents.map((event, index) => (
+              <div key={index} className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                <p className="font-semibold text-[#4361ee] dark:text-[#6d86f1]">{event.date}</p>
+                <p className="text-gray-600 dark:text-gray-300">{event.description}</p>
+                {event.time && <p className="text-gray-500 dark:text-gray-400 text-sm">{event.time}</p>}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400">No events this month</p>
+          )}
         </div>
-      </div>
-      <div className="bg-white rounded-lg shadow-lg p-6 flex-1">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Upcoming Events</h3>
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((event, index) => (
-            <div key={index} className="mb-4 p-3 bg-gray-50 rounded">
-              <p className="font-semibold text-[#4361ee]">{event.date}</p>
-              <p className="text-gray-600">{event.description}</p>
-              {event.time && <p className="text-gray-500 text-sm">{event.time}</p>}
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No events this month</p>
-        )}
       </div>
     </div>
   );

@@ -51,7 +51,8 @@ export default function RegisterPage() {
         </div>
       </nav>
 
-      <main className="max-w-xl mx-auto px-4 py-6">
+      {/* Added margin-top to create space */}
+      <main className="max-w-xl mx-auto px-4 py-6 mt-8 mb-10">
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6" style={{ maxWidth: '450px' }}>
           <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">
             Register for AWS Bootcamp

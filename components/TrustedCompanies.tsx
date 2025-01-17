@@ -1,12 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaAws, FaGoogle, FaMicrosoft } from 'react-icons/fa';
+import { SiOracle, SiSalesforce, SiAdobe, SiSlack, SiDropbox } from 'react-icons/si';
 
 const TrustedCompanies: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   const companies = [
-    'AWS', 'Google Cloud', 'Microsoft Azure', 'IBM Cloud', 'Oracle Cloud',
-    'AWS', 'Google Cloud', 'Microsoft Azure', 'IBM Cloud', 'Oracle Cloud' // Duplicated for seamless loop
+    { name: 'AWS', icon: FaAws },
+    { name: 'Google Cloud', icon: FaGoogle },
+    { name: 'Microsoft Azure', icon: FaMicrosoft },
+    { name: 'Oracle Cloud', icon: SiOracle },
+    { name: 'Salesforce', icon: SiSalesforce },
+    { name: 'Adobe', icon: SiAdobe },
+    { name: 'Slack', icon: SiSlack },
+    { name: 'Dropbox', icon: SiDropbox }
   ];
 
   useEffect(() => {
@@ -37,10 +45,10 @@ const TrustedCompanies: React.FC = () => {
   }, [isHovered]);
 
   return (
-    <div className="bg-white py-16 overflow-hidden">
+    <div className="bg-white dark:bg-gray-900 py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-lg/8 font-semibold text-gray-900 mb-8">
-          Trusted by Leading Cloud Innovators
+        <h2 className="text-center text-lg/8 font-semibold text-gray-900 dark:text-white mb-8">
+          Trusted by Leading Cloud Innovators @
         </h2>
         <div 
           ref={scrollRef}
@@ -48,14 +56,18 @@ const TrustedCompanies: React.FC = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {companies.map((company, index) => (
-            <div 
-              key={index} 
-              className={`flex-shrink-0 flex items-center justify-center h-16 w-48 mx-4 bg-gray-100 rounded-lg shadow-sm transition-all duration-300 ${isHovered ? 'hover:scale-105 hover:shadow-md animate-wiggle' : ''}`}
-            >
-              <span className="text-lg font-semibold text-[#4361ee]">{company}</span>
-            </div>
-          ))}
+          {companies.map((company, index) => {
+            const IconComponent = company.icon;
+            return (
+              <div 
+                key={index} 
+                className={`flex-shrink-0 flex items-center justify-center h-16 w-48 mx-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm transition-all duration-300 ${isHovered ? 'hover:scale-105 hover:shadow-md animate-wiggle' : ''}`}
+              >
+                <IconComponent className="text-3xl text-[#4361ee] dark:text-[#6d86f1] mr-2" />
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">{company.name}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

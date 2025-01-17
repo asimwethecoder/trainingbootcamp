@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 
 const links = [
   { name: 'Upcoming Hackathons', href: '#upcoming' },
@@ -19,9 +19,10 @@ const stats = [
 interface AnimatedNumberProps {
   value: number;
   suffix?: string;
+  isVisible: boolean;
 }
 
-const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = '' }) => {
+const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = '', isVisible }) => {
   const [count, setCount] = useState(0)
   
   const animationConfig = useMemo(() => {
@@ -33,6 +34,8 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = '' }) =
   }, [value])
 
   useEffect(() => {
+    if (!isVisible) return;
+
     setCount(0)
     
     let currentCount = 0
@@ -50,14 +53,36 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = '' }) =
     }, animationConfig.frameDuration)
 
     return () => clearInterval(timer)
-  }, [value, animationConfig])
+  }, [value, animationConfig, isVisible])
 
   return <span aria-live="polite">{count}{suffix}</span>
 }
 
 export default function Hackathon() {
+  const [isVisible, setIsVisible] = useState(false)
+  const hackathonRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    if (hackathonRef.current) {
+      observer.observe(hackathonRef.current)
+    }
+
+    return () => {
+      if (hackathonRef.current) {
+        observer.unobserve(hackathonRef.current)
+      }
+    }
+  }, [])
+
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+    <div ref={hackathonRef} className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img
         alt=""
         src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
@@ -110,6 +135,7 @@ export default function Hackathon() {
                   <AnimatedNumber 
                     value={stat.value} 
                     suffix={stat.value >= 100 ? '+' : ''} 
+                    isVisible={isVisible}
                   />
                 </dd>
               </div>
