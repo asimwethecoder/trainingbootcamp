@@ -14,7 +14,6 @@ import Hackathon from '@/components/Hackathon'
 import TeamMembers from '@/components/TeamMembers'
 import IconCarousel from '@/components/IconCarousel'
 
-
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -55,16 +54,16 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-white overflow-hidden">
+    <main className="min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 text-center
                       transition-all duration-1000 transform
                       ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-        <h1 className="floating text-5xl font-bold text-gray-900 tracking-tight mb-4">
+        <h1 className="floating text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-4">
           Master AWS Cloud Computing
-          <span className="block text-[#4361ee] mt-2">Become AWS Certified</span>
+          <span className="block text-[#4361ee] dark:text-[#6d86f1] mt-2">Become AWS Certified</span>
         </h1>
         
-        <p className="max-w-2xl mx-auto text-xl text-gray-600 mb-12">
+        <p className="max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-300 mb-12">
           Join our comprehensive AWS Cloud Practitioner bootcamp and start your
           cloud journey with hands-on experience.
         </p>
@@ -79,19 +78,16 @@ export default function Home() {
         </div>
         
         <ChevronDown 
-          className="w-6 h-6 mx-auto mt-16 text-gray-400 animate-bounce cursor-pointer"
+          className="w-6 h-6 mx-auto mt-16 text-gray-400 dark:text-gray-500 animate-bounce cursor-pointer"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         />
         <TrustedCompanies />
       </div>
-      {/* Team Members Section */}
+      
       <TeamMembers />
-
       <BentoSection />
       <BootCamp />
       <Hackathon />
-      <AwsFeatures2 />
-      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -104,39 +100,29 @@ export default function Home() {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <feature.icon className={`feature-icon ${hoveredCard === index ? 'pulsing' : ''}`} />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300 group-hover:text-[#4361ee]">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300 group-hover:text-[#4361ee] dark:group-hover:text-[#6d86f1]">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800">
+              <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300 group-hover:text-gray-800 dark:group-hover:text-gray-100">
                 {feature.description}
               </p>
             </div>
           ))}
         </div>
       </div>
-      
-      <div className="py-16">
-        <AwsFeatures />
-      </div>
-      
-      {/*}
-      <div className=" py-16">
-        <SuccessStoriesCarousel />
-      </div>
-      */}
 
       <div className="py-16">
         <IconCarousel />
       </div>
 
-      <div id="calendar" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h2 className="text-6xl font-bold text-gray-900 mb-8 text-center">Bootcamp Calendar</h2>
+      <div id="calendar" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gray-50 dark:bg-gray-900">
+        <h2 className="text-6xl font-bold text-gray-900 dark:text-white mb-8 text-center">Bootcamp Calendar</h2>
         <CustomCalendar upcomingEvents={upcomingEvents} />
       </div>
 
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className={`fixed bottom-8 right-8 bg-[#4361ee] text-white p-4 rounded-full 
+        className={`fixed bottom-8 right-8 bg-[#4361ee] dark:bg-[#6d86f1] text-white p-4 rounded-full 
                    shadow-lg hover:shadow-xl transition-all duration-300 
                    hover:scale-110 hover:rotate-12 
                    ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
