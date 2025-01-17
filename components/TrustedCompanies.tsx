@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaAws, FaGoogle, FaMicrosoft } from 'react-icons/fa';
-import { SiOracle, SiSalesforce, SiAdobe, SiSlack, SiDropbox } from 'react-icons/si';
+import { FaAws, FaGoogle, FaMicrosoft, FaLinux, FaGithub } from 'react-icons/fa';
+import { SiOracle, SiSalesforce, SiAdobe, SiSlack, SiDropbox, SiReact, SiVercel, SiPrisma, SiTerraform, SiRedhat } from 'react-icons/si';
 
 const TrustedCompanies: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -14,7 +14,14 @@ const TrustedCompanies: React.FC = () => {
     { name: 'Salesforce', icon: SiSalesforce },
     { name: 'Adobe', icon: SiAdobe },
     { name: 'Slack', icon: SiSlack },
-    { name: 'Dropbox', icon: SiDropbox }
+    { name: 'Dropbox', icon: SiDropbox },
+    { name: 'React', icon: SiReact },
+    { name: 'Vercel', icon: SiVercel },
+    { name: 'Prisma', icon: SiPrisma },
+    { name: 'Terraform', icon: SiTerraform },
+    { name: 'Linux', icon: FaLinux },
+    { name: 'GitHub', icon: FaGithub },
+    { name: 'Red Hat', icon: SiRedhat }
   ];
 
   useEffect(() => {
@@ -35,7 +42,11 @@ const TrustedCompanies: React.FC = () => {
       animationFrameId = requestAnimationFrame(scroll);
     };
 
-    scroll();
+    const startScrolling = () => {
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    startScrolling();
 
     return () => {
       if (animationFrameId) {
@@ -56,7 +67,7 @@ const TrustedCompanies: React.FC = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {companies.map((company, index) => {
+          {[...companies, ...companies].map((company, index) => {
             const IconComponent = company.icon;
             return (
               <div 
