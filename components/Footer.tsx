@@ -76,6 +76,7 @@ const Footer = () => {
                 alt='logo'
                 width={96}
                 height={24}
+                className="rounded-lg"
               />
             </Link>
             <p className='text-gray-700 dark:text-gray-300'>

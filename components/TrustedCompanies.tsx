@@ -72,7 +72,7 @@ const TrustedCompanies: React.FC = () => {
             return (
               <div 
                 key={index} 
-                className={`flex-shrink-0 flex items-center justify-center h-16 w-48 mx-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm transition-all duration-300 ${isHovered ? 'hover:scale-105 hover:shadow-md animate-wiggle' : ''}`}
+                className={`flex-shrink-0 flex items-center justify-center h-16 w-48 mx-4 bg-white dark:bg-gray-900 rounded-full shadow-sm transition-all duration-300 ${isHovered ? 'hover:scale-105 hover:shadow-md animate-wiggle' : ''}`}
               >
                 <IconComponent className="text-3xl text-[#4361ee] dark:text-[#6d86f1] mr-2" />
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">{company.name}</span>
