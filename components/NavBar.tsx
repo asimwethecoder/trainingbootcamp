@@ -34,16 +34,13 @@ const Navigation: React.FC = () => {
   };
 
   const navLinks = [
+    { href: '/about', label: 'About Us' },
     { href: '/bootcamps', label: 'Bootcamps' },
-    { href: '/events', label: 'Events' },
-    { href: '/resources', label: 'Resources' },
     { 
       href: '/#calendar', 
       label: 'Calendar', 
       onClick: () => scrollToSection('calendar') 
     },
-    { href: '/about', label: 'About Us' },
-    { href: '/blog', label: 'Blog' },
   ];
 
   return (

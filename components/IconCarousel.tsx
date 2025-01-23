@@ -19,7 +19,7 @@ const IconCarousel = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="relative flex justify-center items-center h-64 overflow-hidden bg-pink-50 dark:bg-gray-900">
+    <div className="relative flex justify-center items-center h-64 overflow-hidden bg-white dark:bg-gray-900">
       <motion.div
         className="flex space-x-32"
         animate={{ x: ['0%', '-100%'] }}

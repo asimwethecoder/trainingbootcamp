@@ -22,7 +22,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 1,
     name: 'AWS Cloud Practitioner (CLF-C02)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn about cloud concepts, billing, security, pricing and fundamental AWS cloud services.',
     imageSrc: cloudPractitionerImage,
     imageAlt: "AWS Cloud Practitioner bootcamp illustration",
@@ -30,7 +30,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 2,
     name: 'AWS Developer Associate (DVA-C02)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn how to deploy, work with databases, serverless architecture and use AWS API.',
     imageSrc: awsDeveloperAssociate,
     imageAlt: "AWS Developer Associate bootcamp",
@@ -38,7 +38,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 3,
     name: 'AWS Solutions Architect Associate (SAA-C03)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn how to architect the right combination of services to meet the technical scenario.',
     imageSrc: awsSolutionsArchitectAssociate,
     imageAlt: "AWS Solutions Architect Associate bootcamp",
@@ -46,7 +46,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 4,
     name: 'AWS SysOps Administrator Associate (SOA-C02)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn how to scale and maintain AWS resources with a heavy focus on networking and deployment knowledge.',
     imageSrc: awsSysOpsAdministratorAssociate,
     imageAlt: "AWS SysOps Administrator Associate bootcamp",
@@ -54,7 +54,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 5,
     name: 'AWS Data Engineer Associate (DE1-C01)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn the skills and knowledge required for the core data-related AWS services.',
     imageSrc: awsDataEngineerAssociate,
     imageAlt: "AWS Certified Data Engineer Associate bootcamp",
@@ -62,7 +62,7 @@ const bootcamps: Bootcamp[] = [
   {
     id: 6,
     name: 'AWS Machine Learning Engineer Associate (MLA-C01)',
-    href: '#',
+    href: '/bootcamps',
     description: 'Learn how to design, implement, deploy, and maintain machine learning (ML) solutions on AWS.',
     imageSrc: awsMachineLearningEngineerAssociate,
     imageAlt: "AWS Certified Machine Learning Engineer Associate bootcamp illustration",
