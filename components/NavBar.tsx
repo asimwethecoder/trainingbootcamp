@@ -38,7 +38,7 @@ const Navigation: React.FC = () => {
     { 
       href: '/#calendar', 
       label: 'Calendar', 
-      isCalendar: true // Special flag for calendar link
+      isCalendar: true 
     },
   ];
 
