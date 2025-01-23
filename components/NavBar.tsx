@@ -12,24 +12,23 @@ const Navigation: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      if (pathname !== '/') {
-        router.push(`/#${sectionId}`);
-      } else {
-        section.scrollIntoView({ behavior: 'smooth' });
-        setIsMobileMenuOpen(false);
+  const handleCalendarClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      // If already on homepage, just scroll to calendar section
+      const calendarSection = document.getElementById('calendar');
+      if (calendarSection) {
+        calendarSection.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // If on another page, redirect to homepage with calendar section
+      router.push('/#calendar');
     }
+    setIsMobileMenuOpen(false);
   };
 
-  const handleNavClick = (href: string, onClick?: () => void) => {
-    if (onClick) {
-      onClick();
-    } else {
-      router.push(href);
-    }
+  const handleNavClick = (href: string) => {
+    router.push(href);
     setIsMobileMenuOpen(false);
   };
 
@@ -39,7 +38,7 @@ const Navigation: React.FC = () => {
     { 
       href: '/#calendar', 
       label: 'Calendar', 
-      onClick: () => scrollToSection('calendar') 
+      isCalendar: true // Special flag for calendar link
     },
   ];
 
@@ -69,7 +68,11 @@ const Navigation: React.FC = () => {
               href={link.href} 
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick(link.href, link.onClick);
+                if (link.isCalendar) {
+                  handleCalendarClick(e);
+                } else {
+                  handleNavClick(link.href);
+                }
               }}
               aria-current={pathname === link.href ? 'page' : undefined}
               className="nav-link text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 px-3 py-2 rounded-md"
@@ -104,7 +107,7 @@ const Navigation: React.FC = () => {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 shadow-md">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 shadow-md z-50">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <a
@@ -112,7 +115,11 @@ const Navigation: React.FC = () => {
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(link.href, link.onClick);
+                  if (link.isCalendar) {
+                    handleCalendarClick(e);
+                  } else {
+                    handleNavClick(link.href);
+                  }
                 }}
                 aria-current={pathname === link.href ? 'page' : undefined}
                 className="nav-link block text-gray-700 dark:text-gray-300 
